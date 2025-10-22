@@ -2666,7 +2666,12 @@
                 "Edm.Half",
                 "Edm.Int16",
                 "Edm.SByte",
-                "Edm.Byte"
+                "Edm.Byte",
+                "Collection(Edm.Single)",
+                "Collection(Edm.Half)",
+                "Collection(Edm.SByte)",
+                "Collection(Edm.Int16)",
+                "Collection(Edm.Byte)"
             ],
             "x-ms-enum": {
                 "name": "SearchFieldDataType",
@@ -6641,7 +6646,6 @@
                 },
                 "queryTimeout": {
                     "type": "string",
-                    "default": "00:05:00",
                     "description": "Increases the timeout beyond the 5-minute default for Azure SQL database data sources, specified in the format \"hh:mm:ss\"."
                 }
             },

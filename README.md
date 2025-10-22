@@ -6,7 +6,7 @@
 
 ## Overview
 
-[Azure AI Search](https://azure.microsoft.com/products/ai-services/ai-search/) (formerly known as Azure Cognitive Search) is a cloud search service that gives developers infrastructure, APIs, and tools for building a rich search experience over private, heterogeneous content in web, mobile, and enterprise applications.
+[Azure AI Search](https://azure.microsoft.com/products/ai-services/ai-search/) is a cloud search service that gives developers infrastructure, APIs, and tools for building a rich search experience over private, heterogeneous content in web, mobile, and enterprise applications.
 
 The `ballarinax/azure.ai.search` package offers functionality to connect and interact with [Azure AI Search REST API](https://docs.microsoft.com/en-us/rest/api/searchservice/) enabling seamless integration with Azure's powerful search and indexing capabilities for building comprehensive search solutions.
 
@@ -18,9 +18,9 @@ To use the Azure AI Search Connector, you must have an Azure subscription and an
 
 1. Sign in to the [Azure portal](https://portal.azure.com).
 
-2. Click on "Create a resource" and search for "Azure AI Search".
+2. Click on "Create a resource" and search for "AI Search".
 
-3. Select "Azure AI Search" and click "Create".
+3. Select "AI Search" and click "Create".
 
 4. Fill in the required details:
    - Resource group: Select or create a new resource group
@@ -60,11 +60,7 @@ Create an `azureSearch:Client` with your Azure AI Search service URL and admin k
 configurable string serviceUrl = ?;
 configurable string adminKey = ?;
 
-final azureSearch:Client searchClient = check new(serviceUrl, {
-    auth: {
-        apiKey: adminKey
-    }
-});
+final azureSearch:Client searchClient = check new (serviceUrl, {});
 ```
 
 ### Step 3: Invoke the connector operation
@@ -96,7 +92,9 @@ public function main() returns error? {
         ]
     };
 
-    azureSearch:SearchIndex response = check searchClient->indexesCreate(searchIndex);
+    SearchIndex response = check searchClient->indexesCreate(searchIndex, {"api-key": adminKey}, {
+        api\-version: "2025-09-01"
+    });
 }
 ```
 

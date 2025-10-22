@@ -345,7 +345,7 @@ public type IndexingParametersConfiguration record {
     # Specifies the environment in which the indexer should execute.
     ExecutionEnvironment executionEnvironment?;
     # Increases the timeout beyond the 5-minute default for Azure SQL database data sources, specified in the format "hh:mm:ss".
-    string queryTimeout = "00:05:00";
+    string queryTimeout?;
 };
 
 # Represents the Headers record for the operation: indexesCreate

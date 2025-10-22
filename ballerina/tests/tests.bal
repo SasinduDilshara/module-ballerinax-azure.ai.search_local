@@ -1,4 +1,4 @@
-// Copyright (c) 2024, WSO2 LLC. (http://www.wso2.com).
+// Copyright (c) 2025, WSO2 LLC. (http://www.wso2.com).
 //
 // WSO2 LLC. licenses this file to you under the Apache License,
 // Version 2.0 (the "License"); you may not use this file except
@@ -14,13 +14,11 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import ballerina/os;
 import ballerina/test;
 import ballerina/uuid;
 
-configurable boolean isLiveServer = os:getEnv("IS_LIVE_SERVER") == "true";
-configurable string serviceUrl = isLiveServer ? os:getEnv("AZURE_SEARCH_SERVICE_URL") : "http://localhost:9090";
-configurable string adminKey = isLiveServer ? os:getEnv("AZURE_SEARCH_ADMIN_KEY") : "test-admin-key";
+configurable string serviceUrl = "http://localhost:9090";
+configurable string adminKey = "test-admin-key";
 
 final Client searchClient = check initClient();
 
@@ -29,7 +27,7 @@ function initClient() returns Client|error {
 }
 
 @test:Config {
-    groups: ["live_tests", "mock_tests"]
+    groups: ["mock_tests"]
 }
 isolated function testCreateSearchIndex() returns error? {
     string indexName = "test-index-" + uuid:createType1AsString().substring(0, 8);
@@ -77,7 +75,7 @@ isolated function testCreateSearchIndex() returns error? {
 }
 
 @test:Config {
-    groups: ["live_tests", "mock_tests"]
+    groups: ["mock_tests"]
 }
 isolated function testListIndexes() returns error? {
     ListIndexesResult response = check searchClient->indexesList({"api-key": adminKey}, {
@@ -87,7 +85,7 @@ isolated function testListIndexes() returns error? {
 }
 
 @test:Config {
-    groups: ["live_tests", "mock_tests"]
+    groups: ["mock_tests"]
 }
 isolated function testGetServiceStatistics() returns error? {
     ServiceStatistics stats = check searchClient->getServiceStatistics({"api-key": adminKey}, {

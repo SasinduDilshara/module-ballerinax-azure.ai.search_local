@@ -78,6 +78,78 @@ These changes are done in order to improve the overall usability, and as workaro
 
    - **Reason**: Changed to use vendor extension format to avoid potential conflicts with OpenAPI specification processing tools that may have strict requirements for the standard `externalDocs` property.
 
+5. Add new data types to SearchFieldDataType enum:
+
+   - **Changed Enum**: `SearchFieldDataType`
+
+   - **Original Values**:
+
+      ```json
+      "Edm.String",
+      "Edm.Int32",
+      "Edm.Int64",
+      "Edm.Double",
+      "Edm.Boolean",
+      "Edm.DateTimeOffset",
+      "Edm.GeographyPoint",
+      "Edm.ComplexType",
+      "Edm.Single",
+      "Edm.Half",
+      "Edm.Int16",
+      "Edm.SByte",
+      "Edm.Byte"
+      ```
+
+   - **Updated Values**:
+
+      ```json
+      "Edm.String",
+      "Edm.Int32",
+      "Edm.Int64",
+      "Edm.Double",
+      "Edm.Boolean",
+      "Edm.DateTimeOffset",
+      "Edm.GeographyPoint",
+      "Edm.ComplexType",
+      "Edm.Single",
+      "Edm.Half",
+      "Edm.Int16",
+      "Edm.SByte",
+      "Edm.Byte",
+      "Collection(Edm.Single)",
+      "Collection(Edm.Half)",
+      "Collection(Edm.SByte)",
+      "Collection(Edm.Int16)",
+      "Collection(Edm.Byte)"
+      ```
+
+   - **Reason**: Added new data types to the enum to support a wider range of field types in Azure AI Search, enhancing the flexibility and usability of the API.
+
+6. Mark the `queryTimeout` property as optional:
+
+   - **Changed Property**: `queryTimeout` in `IndexingParametersConfiguration`
+
+   - **Original**:
+
+      ```json
+      "queryTimeout": {
+        "type": "string",
+        "default": "00:05:00",
+        "description": "Increases the timeout beyond the 5-minute default for Azure SQL database data sources, specified in the format \"hh:mm:ss\"."
+      }
+      ```
+
+   - **Updated**:
+
+      ```json
+      "queryTimeout": {
+        "type": "string",
+        "description": "Increases the timeout beyond the 5-minute default for Azure SQL database data sources, specified in the format \"hh:mm:ss\"."
+      }
+      ```
+
+   - **Reason**: Marked as nullable to allow for optional specification of the timeout value, providing greater flexibility in API usage. Some API versions may not require this field to be set.
+
 ## OpenAPI cli command
 
 The following command was used to generate the Ballerina client from the OpenAPI specification. The command should be executed from the repository root directory.
